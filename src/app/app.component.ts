@@ -1,12 +1,34 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { StarShipFightsComponent } from './modules';
+import {
+  SpriteAnimacionTecniqueComponent,
+  ParallaxBackgroundComponent,
+  EnemyMovementPatternComponent,
+  AnimationTriggerComponent,
+  PointAndShootComponent,
+  EnemiesVarietyComponent,
+  SideScrollerComponent,
+  StateManagementComponent,
+} from './modules';
+import { EndlessRunnerComponent } from './endless-runner/endless-runner.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, StarShipFightsComponent],
+  imports: [
+    CommonModule,
+    RouterOutlet,
+    SpriteAnimacionTecniqueComponent,
+    ParallaxBackgroundComponent,
+    EnemyMovementPatternComponent,
+    AnimationTriggerComponent,
+    PointAndShootComponent,
+    EnemiesVarietyComponent,
+    SideScrollerComponent,
+    StateManagementComponent,
+    EndlessRunnerComponent,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
