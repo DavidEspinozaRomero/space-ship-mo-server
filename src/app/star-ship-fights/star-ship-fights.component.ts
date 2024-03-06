@@ -16,10 +16,9 @@ export class StarShipFightsComponent implements OnInit {
   game!: Game;
 
   // inputHandler = new InputHandler();
-  assets: { [key: string]: HTMLImageElement } = {
-    spaceShipImg: new Image(),
+  assets: AssetProps = {
+    spaceShipImg: { img: new Image(), width: 89, height: 113 },
   };
-  spaceShipImg: { src: string } = new Image();
 
   ngOnInit(): void {
     if (this.canvas1()) {
@@ -27,7 +26,7 @@ export class StarShipFightsComponent implements OnInit {
       this.canvas.width = 500; // window.innerWidth;
       this.canvas.height = 500; // window.innerHeight;
       this.ctx = this.canvas.getContext('2d');
-      this.assets['spaceShipImg'].src = 'assets/space-ship.png';
+      this.assets['spaceShipImg'].img.src = 'assets/space-ship.png';
     }
 
     this.game = new Game(this.canvas.width, this.canvas.height, this.assets);
@@ -73,12 +72,16 @@ class Player {
   // maxHealth: number = 100;
   // health: number = this.maxHealth;
   // damage: number = 10;
-  // img: HTMLImageElement;
-  width = 30;
-  height = 50;
+
+  spriteWidth = this.game.assets['spaceShipImg'].width;
+  spriteHeight = this.game.assets['spaceShipImg'].height;
+  width = this.spriteWidth * 0.8;
+  height = this.spriteHeight * 0.8;
+  img = this.game.assets['spaceShipImg'].img;
   speed = 0;
   maxSpeed = 5;
-  angle = Math.floor(Math.random() * 8) * 45;
+  // angle = Math.floor(Math.random() * 8) * 45;
+  angle = 90;
   cooldownAngle = 0;
   cooldown = 0;
 
@@ -141,21 +144,32 @@ class Player {
     // this.speed *= this.friction;
   }
   draw(ctx: CanvasRenderingContext2D) {
-    ctx.fillRect(10, 20, 10, 20);
+    // ctx.fillRect(10, 20, 10, 20);
+    const centerX = this.x + this.width * 0.5;
+    const centerY = this.y + this.height * 0.5;
+
     ctx.save();
-    ctx.translate(this.x + this.width / 2, this.y + this.height / 2);
-    ctx.rotate((this.angle * Math.PI) / 180);
+    ctx.translate(centerX, centerY);
+    ctx.rotate((((this.angle - 90) * Math.PI) / 180) * -1);
     ctx.drawImage(
-      this.game.assets['spaceShipImg'],
-      this.x,
-      this.y,
-      this.width,
-      this.height,
-      -this.width / 2,
-      -this.height / 2,
+      this.img,
+      0,
+      0,
+      this.spriteWidth,
+      this.spriteHeight,
+      -this.width * 0.5,
+      -this.height * 0.5,
       this.width,
       this.height
     );
+    if (this.game.debug) {
+      ctx.strokeRect(
+        -this.width * 0.5,
+        -this.height * 0.5,
+        this.width,
+        this.height
+      );
+    }
     ctx.restore();
 
     // ctx.save();
@@ -221,10 +235,11 @@ class Game {
   player = new Player(this);
   // bot = new Bot(this);
   shoots: Shoot[] = [];
+  debug = false;
   constructor(
     public readonly width: number,
     public readonly height: number,
-    public assets: { [key: string]: HTMLImageElement }
+    public assets: AssetProps
   ) {}
 
   update() {
@@ -242,4 +257,12 @@ class Game {
       shoot.draw(ctx);
     });
   }
+}
+
+interface AssetProps {
+  [key: string]: {
+    img: HTMLImageElement;
+    width: number;
+    height: number;
+  };
 }
