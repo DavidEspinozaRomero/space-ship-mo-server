@@ -1,14 +1,3 @@
-import { Component, ElementRef, OnInit, viewChild } from '@angular/core';
-import { InputHandler } from './models/input-handler.model';
-
-@Component({
-  selector: 'app-star-ship-fights',
-  standalone: true,
-  imports: [],
-  templateUrl: './star-ship-fights.component.html',
-  styleUrl: './star-ship-fights.component.scss',
-})
-export class StarShipFightsComponent implements OnInit {
   canvas1 = viewChild<ElementRef<HTMLCanvasElement>>('canvas1');
   canvas!: HTMLCanvasElement;
   ctx!: CanvasRenderingContext2D | null;
