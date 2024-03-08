@@ -19,10 +19,6 @@ const io = new Server(server, {
 // });
 
 async function main() {
-  let rooms = []
-  let users = []
-
-  app.use(express.static('public'));
   io.on('connect', (socket) => {
     console.log('user connected:', socket.id);
     // console.log(socket.rooms);

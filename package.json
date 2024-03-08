@@ -1,5 +1,5 @@
 {
-  "name": "space-ship-mo-game",
+  "name": "space-ship-mo-server",
   "version": "0.0.1",
   "description": "mo game server",
   "main": "index.js",
@@ -17,11 +17,11 @@
   "devDependencies": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/david-espinoza/space-ship-mo-game.git"
+    "url": "git+https://github.com/david-espinoza/space-ship-mo-server.git"
   },
   "bugs": {
-    "url": "https://github.com/david-espinoza/space-ship-mo-game/issues"
+    "url": "https://github.com/david-espinoza/space-ship-mo-server/issues"
   },
-  "homepage": "https://github.com/david-espinoza/space-ship-mo-game#readme",
+  "homepage": "https://github.com/david-espinoza/space-ship-mo-server#readme",
   "private": false
 }
