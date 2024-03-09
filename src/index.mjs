@@ -72,7 +72,6 @@ function tick() {
     return playerProps
   }));
 
-  console.log(game.shoots[0]);
   io.emit('shoots', game.shoots.map((shoot) => {
     const { game, ...shootProps } = shoot;
     return shootProps
