@@ -11,7 +11,6 @@ import { Server } from 'socket.io';
 // local packages
 import { Game } from './models/game.model.mjs';
 import { Player } from './models/player.model.mjs';
-// import { createUser } from './users.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -24,15 +23,16 @@ const io = new Server(server, {
   }
 });
 
-// app.get('/', (req, res) => {
-//   res.sendFile(join(__dirname, 'index.html'));
-// });
+app.get('/', (req, res) => {
+  res.sendFile(join(__dirname,"../dist", 'index.html'));
+});
 
 
 const ticksPerSecond = 30;
 const canvas = { width: 1000, height: 1000 };
 const game = new Game(canvas.width, canvas.height);
 
+const PORT = process.env.PORT || 3000;
 
 (async function main() {
   io.on('connect', (socket) => {
@@ -56,8 +56,8 @@ const game = new Game(canvas.width, canvas.height);
     });
   });
 
-  server.listen(3000, () => {
-    console.log('server running at http://localhost:3000');
+  server.listen(PORT, () => {
+    console.log('server running at http://localhost:' + PORT);
   });
 
   setInterval(tick, 1000 / ticksPerSecond);
